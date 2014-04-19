@@ -3,17 +3,31 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web;
+using System.Web.Http.Filters;
 using DPE.LogLibrary;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace DPE.ExceptionFilter
 {
-    public class ExceptionFilter
+    public class ExceptionFilter : ExceptionFilterAttribute
     {
+        private readonly ExceptionHelper _exceptionHelper;
+
+        public ExceptionFilter(ExceptionHelper exceptionHelper)
+        {
+            _exceptionHelper = exceptionHelper;
+        }
+
+        public override void OnException(HttpActionExecutedContext actionContext)
+        {
+            _exceptionHelper.LogError(actionContext.Request, actionContext.Exception);
+            actionContext.Response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        }
 
     }
     public class ExceptionHelper
