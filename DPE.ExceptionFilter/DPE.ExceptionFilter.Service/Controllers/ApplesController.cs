@@ -16,6 +16,5 @@ namespace DPE.ExceptionFilter.Service.Controllers
         {
             return _applesRepository.ListAll();
         }
-
     }
 }
