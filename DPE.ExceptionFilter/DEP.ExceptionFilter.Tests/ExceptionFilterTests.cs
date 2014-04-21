@@ -4,7 +4,7 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using System.Web.Http.Hosting;
-using DPE.ExceptionFilter.Service.Controllers;
+using DEP.ExceptionFilter.Tests.TestHelper;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -13,7 +13,7 @@ namespace DEP.ExceptionFilter.Tests
     public class ExceptionFilterTests
     {
         private DPE.ExceptionFilter.ExceptionFilter _exceptionFilter;
-        private ApplesController _applesController;
+        private TestController _testController;
         private string _uri;
         private const string LogPath = @"C:\log\error.txt";
         private const string RequestBody = "request Body";
@@ -23,7 +23,7 @@ namespace DEP.ExceptionFilter.Tests
         public void SetUp()
         {
             _exceptionFilter = new DPE.ExceptionFilter.ExceptionFilter();
-            _applesController = new ApplesController();
+            _testController = new TestController();
             _uri = "http://localhost/someUri/mogul";
         }
 
@@ -54,12 +54,12 @@ namespace DEP.ExceptionFilter.Tests
             var request = new HttpRequestMessage(HttpMethod.Put, _uri) { Content = new StringContent(content) };
             request.Headers.Add("foo", "bar");
             request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            _applesController.Request = request;
+            _testController.Request = request;
             var httpControllerContext = new HttpControllerContext
             {
                 Request = request,
-                Controller = _applesController,
-                ControllerDescriptor = new HttpControllerDescriptor { ControllerName = "ApplesController" }
+                Controller = _testController,
+                ControllerDescriptor = new HttpControllerDescriptor { ControllerName = "TestController" }
             };
             return httpControllerContext;
         }

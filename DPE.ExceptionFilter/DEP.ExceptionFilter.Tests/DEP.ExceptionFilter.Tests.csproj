@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExceptionFilterTests.cs" />
+    <Compile Include="TestHelper\TestController.cs" />
     <Compile Include="TestHelper\TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,10 +73,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DPE.ExceptionFilter.Service\DPE.ExceptionFilter.Service.csproj">
-      <Project>{0f61ad7e-b023-4f34-b732-c383e67bc8a3}</Project>
-      <Name>DPE.ExceptionFilter.Service</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DPE.ExceptionFilter\DPE.ExceptionFilter.csproj">
       <Project>{1c3f1085-eaf2-4029-a98f-1b899449003e}</Project>
       <Name>DPE.ExceptionFilter</Name>
