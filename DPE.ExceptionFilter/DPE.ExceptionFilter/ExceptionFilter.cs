@@ -16,7 +16,8 @@ namespace DPE.ExceptionFilter
         public override void OnException(HttpActionExecutedContext actionContext)
         {
             _exceptionHelper.LogError(actionContext.Request, actionContext.Exception);
-            actionContext.Response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.InternalServerError,
+                actionContext.Exception.Message);
         }
     }
 }
